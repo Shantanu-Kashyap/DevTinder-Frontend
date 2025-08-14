@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -11,43 +11,40 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
-  const [error,setError]=useState("")
-  const navigate =useNavigate();
-  const dispatch =useDispatch();
-  
+  const [error, setError] = useState("");
 
-const handleLogin = async () => {
-  
-  try {
-    const res = await axios.post(
-      BASE_URL+ "/login",
-      { emailId, password },
-      { withCredentials: true }
-    );
-   
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    dispatch(addUser(res.data));
-    navigate("/");
-  } catch (err) {
-    setError(err?.response?.data || "Login error:");
-     }
-   };
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/login`,
+        { emailId, password },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data));
+      navigate("/");
+    } catch (err) {
+      setError(err?.response?.data || "Login error:");
+    }
+  };
 
   const handleSignUp = async () => {
     try {
       const res = await axios.post(
-        BASE_URL + "/signup",
+        `${BASE_URL}/signup`,
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
       dispatch(addUser(res.data.data));
-      return navigate("/profile");
+      navigate("/profile");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
     }
+  };
 
-};
-   return (
+  return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
@@ -127,4 +124,5 @@ const handleLogin = async () => {
     </div>
   );
 };
+
 export default Login;
