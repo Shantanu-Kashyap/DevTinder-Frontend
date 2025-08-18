@@ -1,0 +1,120 @@
+body {
+ margin: 0;
+ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+ background-color: #0b0c10;
+ color: #c5c6c7;
+ min-height: 100vh; 
+ display: flex;
+ flex-direction: column;
+}
+.login-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-grow: 1;
+ padding: 20px;
+}
+
+.login-card {
+ width: 100%;
+ max-width: 400px;
+ background-color: #1f2833;
+ border-radius: 12px;
+ box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+ padding: 40px;
+ text-align: center;
+ border: 1px solid #45a29e;
+ margin-bottom: 40px; 
+}
+
+.login-header {
+ margin-bottom: 30px;
+}
+
+.login-title {
+ color: #66fcf1;
+ font-size: 2rem;
+ font-weight: 700;
+ margin: 0;
+}
+
+.login-subtitle {
+ color: #c5c6c7;
+ font-size: 1rem;
+ margin-top: 8px;
+}
+.input-group {
+ text-align: left;
+ margin-bottom: 20px;
+}
+
+.input-group label {
+ display: block;
+ color: #c5c6c7;
+ margin-bottom: 8px;
+ font-weight: 500;
+}
+
+.input-group input {
+ width: 100%;
+ padding: 12px;
+ background-color: #0b0c10;
+ border: 1px solid #45a29e;
+ border-radius: 8px;
+ color: #c5c6c7;
+ font-size: 1rem;
+ transition: border-color 0.3s ease-in-out;
+}
+
+.input-group input:focus {
+ outline: none;
+ border-color: #66fcf1;
+}
+
+.input-group input::placeholder {
+ color: #8892b0;
+}
+
+.error-message {
+ color: #ff6347;
+ margin: 20px 0;
+ font-weight: 500;
+}
+
+.login-button {
+ width: 100%;
+ padding: 14px;
+ background-color: #45a29e;
+ color: #0b0c10;
+ border: none;
+ border-radius: 8px;
+ font-size: 1.1rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.login-button:hover {
+ background-color: #66fcf1;
+ transform: translateY(-2px);
+}
+.toggle-form {
+ cursor: pointer;
+ color: #45a29e;
+ margin-top: 25px;
+ font-weight: 500;
+ transition: color 0.3s ease-in-out;
+}
+
+.toggle-form:hover {
+ color: #66fcf1;
+ text-decoration: underline;
+}
+
+footer {
+ background-color: #1f2833;
+ color: #c5c6c7;
+ padding: 20px;
+ text-align: center;
+ border-top: 1px solid #45a29e;
+}

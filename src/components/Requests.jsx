@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
 import { useEffect, useState } from "react";
+import "./Requests.css";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
@@ -24,7 +25,6 @@ const Requests = () => {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
       });
-
       dispatch(addRequests(res.data.data));
     } catch (err) {}
   };
@@ -36,52 +36,59 @@ const Requests = () => {
   if (!requests) return;
 
   if (requests.length === 0)
-    return <h1 className="flex justify-center my-10"> No Requests Found</h1>;
+    return (
+      <div className="requests-container no-requests-container">
+        <h1 className="requests-title">Connection Requests</h1>
+        <p className="no-requests-message">No new requests found.</p>
+      </div>
+    );
 
   return (
-    <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
+    <div className="requests-container">
+      <h1 className="requests-title">Connection Requests</h1>
 
-      {requests.map((request) => {
-        const { _id, firstName, lastName, photoURL, age, gender, about } =
-          request.fromUserId;
+      <div className="requests-list">
+        {requests.map((request) => {
+          const { _id, firstName, lastName, photoURL, age, gender, about } = request.fromUserId;
+          return (
+            <div key={_id} className="request-card">
+              <div className="request-info">
+                <div className="request-avatar-container">
+                  <img
+                    alt="photo"
+                    className="request-avatar"
+                    src={photoURL}
+                  />
+                </div>
+                <div className="request-details">
+                  <h2 className="request-name">
+                    {firstName} {lastName}
+                  </h2>
+                  {age && gender && (
+                    <p className="request-meta">{age}, {gender}</p>
+                  )}
+                  {about && <p className="request-about">{about}</p>}
+                </div>
+              </div>
 
-        return (
-          <div
-            key={_id}
-            className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto"
-          >
-            <div>
-              <img
-                alt="photo"
-                className="w-20 h-20 rounded-full"
-                src={photoURL}
-              />
+              <div className="request-actions">
+                <button
+                  className="action-btn reject-btn"
+                  onClick={() => reviewRequest("rejected", request._id)}
+                >
+                  Reject
+                </button>
+                <button
+                  className="action-btn accept-btn"
+                  onClick={() => reviewRequest("accepted", request._id)}
+                >
+                  Accept
+                </button>
+              </div>
             </div>
-            <div className="text-left mx-4 ">
-              <h2 className="font-bold text-xl">
-                {firstName + " " + lastName}
-              </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
-              <p>{about}</p>
-            </div>
-            <div>
-              <button
-                className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", request._id)}
-              >
-                Reject
-              </button>
-              <button
-                className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", request._id)}
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

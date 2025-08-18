@@ -1,0 +1,57 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background-color: #0b0c10;
+  color: #c5c6c7;
+  overflow: hidden;
+}
+
+/* The main layout container, managing the sticky footer */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative; /* Crucial for the animated-background positioning */
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  animation: floating-particles 20s infinite ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes floating-particles {
+  0% {
+    box-shadow:
+      -10vw 10vw 10px #66fcf1,
+      -20vw 5vw 12px #45a29e,
+      -30vw 25vw 8px #66fcf1,
+      -40vw 15vw 10px #45a29e,
+      -50vw 30vw 15px #66fcf1,
+      -60vw 18vw 10px #45a29e,
+      -70vw 22vw 12px #66fcf1,
+      -80vw 5vw 8px #45a29e;
+  }
+  100% {
+    box-shadow:
+      -15vw 15vw 12px #45a29e,
+      -25vw 8vw 10px #66fcf1,
+      -35vw 30vw 15px #45a29e,
+      -45vw 10vw 8px #66fcf1,
+      -55vw 25vw 10px #45a29e,
+      -65vw 20vw 12px #66fcf1,
+      -75vw 25vw 8px #45a29e,
+      -85vw 10vw 15px #66fcf1;
+  }
+}
+
+.main-content {
+  flex-grow: 1;
+}

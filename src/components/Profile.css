@@ -1,0 +1,135 @@
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 40px 20px;
+  flex-wrap: wrap; 
+}
+.profile-edit-form {
+  background-color: #1f2833;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  max-width: 450px;
+  width: 100%;
+}
+
+.form-title {
+  color: #66fcf1;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label span {
+  color: #c5c6c7;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  background-color: #0b0c10;
+  border: 1px solid #45a29e;
+  border-radius: 8px;
+  color: #c5c6c7;
+  font-size: 1rem;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #66fcf1;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.save-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #45a29e;
+  color: #0b0c10;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.save-button:hover {
+  background-color: #66fcf1;
+  transform: translateY(-2px);
+}
+
+.error-message {
+  color: #ff6347;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* User Card Preview Section */
+.profile-preview-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #c5c6c7;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Toast Message */
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #45a29e;
+  color: #0b0c10;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}

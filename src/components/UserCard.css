@@ -1,0 +1,138 @@
+.user-card-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #1f2833;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #45a29e;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.user-card-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+}
+
+.user-card-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #66fcf1;
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+  margin-bottom: 20px;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #c5c6c7;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.user-meta {
+  font-size: 1rem;
+  color: #8892b0;
+  margin: 5px 0 0;
+}
+
+.user-bio {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  margin-top: 15px;
+  line-height: 1.4;
+  max-width: 350px;
+}
+
+.user-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-icon {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+.ignore-btn {
+
+  background-color: transparent;
+  border: 2px solid #f72585;
+}
+
+.ignore-btn:hover {
+  background-color: #f72585;
+   background-color: #66fcf1;
+  color: #0b0c10;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+}
+
+.interested-btn {
+ background-color: #f72585;
+
+  color: #0b0c10;
+  border: 2px solid #66fcf1;
+}
+
+.interested-btn:hover {
+  background-color: #45a29e;
+  color: #c5c6c7;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(102, 252, 241, 0.4);
+}
+
+.user-card-container {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.user-card-container.swipe-left {
+  transform: translateX(-150%) rotate(-10deg);
+  opacity: 0;
+}
+
+.user-card-container.swipe-right {
+  transform: translateX(150%) rotate(10deg); 
+  opacity: 0;
+}

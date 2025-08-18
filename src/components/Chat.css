@@ -1,0 +1,120 @@
+.chat-container {
+  width: 95%;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  background-color: #1f2833;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+.chat-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #45a29e;
+  text-align: center;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #FF00FF;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.chat-message-sent {
+  align-self: flex-end;
+  max-width: 70%;
+  text-align: right;
+}
+
+.chat-message-received {
+  align-self: flex-start;
+  max-width: 70%;
+  text-align: left;
+}
+
+.message-header {
+  font-size: 0.9rem;
+  color: #c5c6c7;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: #8892b0;
+  margin-left: 10px;
+}
+
+.message-bubble {
+  background-color: #45a29e;
+  color: #0b0c10;
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  word-wrap: break-word;
+}
+
+.chat-message-sent .message-bubble {
+  background-color: #66fcf1;
+}
+
+.message-footer {
+  font-size: 0.75rem;
+  color: #8892b0;
+  margin-top: 5px;
+}
+
+.chat-input-area {
+  padding: 1.5rem;
+  border-top: 1px solid #45a29e;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 2px solid #45a29e;
+  border-radius: 25px;
+  background-color: #121c27;
+  color: #c5c6c7;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.chat-input::placeholder {
+  color: #8892b0;
+}
+
+.chat-input:focus {
+  border-color: #66fcf1;
+}
+
+.send-button {
+  padding: 12px 24px;
+  background-color: #45a29e;
+  color: #0b0c10;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.send-button:hover {
+  background-color: #66fcf1;
+  transform: translateY(-2px);
+}
