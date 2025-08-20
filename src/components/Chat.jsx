@@ -33,7 +33,7 @@ const Chat = () => {
 
       const chatMessages = chat?.data?.messages
         .map((msg) => {
-         
+          
           if (!msg.senderId || typeof msg.senderId !== 'object') {
             console.warn("Message received without valid sender data:", msg);
             return null;
@@ -61,8 +61,9 @@ const Chat = () => {
 
   const sendMessage = () => {
     if (newMessage.trim() === "") return;
-
-    const socket = createSocketConnection();
+    
+    // FIX: Pass withCredentials option here for local dev
+    const socket = createSocketConnection({ withCredentials: true });
 
     socket.emit("sendMessage", {
       userId,
@@ -94,7 +95,8 @@ const Chat = () => {
     if (!userId) {
       return;
     }
-    const socket = createSocketConnection();
+    // FIX: Pass withCredentials option here
+    const socket = createSocketConnection({ withCredentials: true });
 
     socket.emit("joinChat", {
       firstName: user.firstName,
