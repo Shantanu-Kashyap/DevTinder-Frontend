@@ -5,6 +5,6 @@ export const createSocketConnection = (options) => {
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     return io("http://localhost:3000", options); 
   } else {
-    return io(options); 
+    return io("http://13.53.90.173:3000", options);
   }
 };
