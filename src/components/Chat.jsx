@@ -14,14 +14,15 @@ const Chat = () => {
   const userId = user?._id;
 
   const chatMessagesRef = useRef(null);
+  const socketRef = useRef(null);
 
   const formatTime = (dateString) => {
     const date = new Date(dateString);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const ampm = hours >= 12 ? "PM" : "AM";
     const formattedHours = hours % 12 || 12;
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
     return `${formattedHours}:${formattedMinutes} ${ampm}`;
   };
 
@@ -33,14 +34,13 @@ const Chat = () => {
 
       const chatMessages = chat?.data?.messages
         .map((msg) => {
-          
-          if (!msg.senderId || typeof msg.senderId !== 'object') {
+          if (!msg.senderId || typeof msg.senderId !== "object") {
             console.warn("Message received without valid sender data:", msg);
             return null;
           }
-          
+
           const { senderId, text, createdAt } = msg;
-          
+
           return {
             _id: msg._id,
             senderId: senderId._id,
@@ -61,11 +61,8 @@ const Chat = () => {
 
   const sendMessage = () => {
     if (newMessage.trim() === "") return;
-    
-    // FIX: Pass withCredentials option here for local dev
-    const socket = createSocketConnection({ withCredentials: true });
 
-    socket.emit("sendMessage", {
+    socketRef.current.emit("sendMessage", {
       userId,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -76,7 +73,7 @@ const Chat = () => {
     setMessages((prevMessages) => [
       ...prevMessages,
       {
-        _id: Date.now(), 
+        _id: Date.now(),
         firstName: user.firstName,
         lastName: user.lastName,
         text: newMessage,
@@ -92,11 +89,10 @@ const Chat = () => {
   }, [targetUserId, userId]);
 
   useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    // FIX: Pass withCredentials option here
+    if (!userId) return;
+
     const socket = createSocketConnection({ withCredentials: true });
+    socketRef.current = socket;
 
     socket.emit("joinChat", {
       firstName: user.firstName,
@@ -104,32 +100,23 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived", ({ senderId, firstName, lastName, text, createdAt }) => {
-      if (senderId === userId) {
-        return;
+    socket.on(
+      "messageReceived",
+      ({ senderId, firstName, lastName, text, createdAt }) => {
+        if (senderId === userId) return;
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            senderId,
+            firstName,
+            lastName,
+            text,
+            timestamp: createdAt,
+            isSentByUser: false,
+          },
+        ]);
       }
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          senderId: senderId,
-          firstName,
-          lastName,
-          text,
-          timestamp: createdAt,
-          isSentByUser: false,
-        },
-      ]);
-    });
-    
-    socket.on("messageSeen", ({ userId: seenById }) => {
-      if (seenById === targetUserId) {
-        setMessages(prevMessages => 
-          prevMessages.map(msg => 
-            msg.isSentByUser ? { ...msg, isSeen: true } : msg
-          )
-        );
-      }
-    });
+    );
 
     return () => {
       socket.disconnect();
@@ -138,7 +125,8 @@ const Chat = () => {
 
   useEffect(() => {
     if (chatMessagesRef.current) {
-      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+      chatMessagesRef.current.scrollTop =
+        chatMessagesRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -151,14 +139,14 @@ const Chat = () => {
         {messages.map((msg, index) => (
           <div
             key={msg._id || index}
-            className={msg.isSentByUser ? "chat-message-sent" : "chat-message-received"}
+            className={
+              msg.isSentByUser ? "chat-message-sent" : "chat-message-received"
+            }
           >
             <div className="message-header">
               {`${msg.firstName} ${msg.lastName}`}
               {msg.timestamp && (
-                <time className="message-time">
-                  {formatTime(msg.timestamp)}
-                </time>
+                <time className="message-time">{formatTime(msg.timestamp)}</time>
               )}
             </div>
             <div className="message-bubble">{msg.text}</div>
